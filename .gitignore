@@ -1,5 +1,16 @@
 # Compiled class file
 *.class
+Reports*
+.classpath
+.project
+.settings*
+/.idea/
+/target/
+allure-results\*
+*.iml
+*.ipr
+*.iws
+ajcore*
 
 # Log file
 *.log
