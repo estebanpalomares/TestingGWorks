@@ -5,18 +5,18 @@
 
     @MASTER_LOGIN_SUCCESS
     Scenario: Do a success log in
-      Given I have the Master Log In page open
-      When I use a "valid" credentials
-      Then I am logged in
+      Given A user has the Master Log In page open in "chrome" browser
+      When The user uses a "valid" credentials in Master page
+      Then The user is logged in
 
     @MASTER_LOGIN_FAIL
     Scenario Outline: Fail scenarios of Master Log In
-      Given I have the Master Log In page open
-      When I use a "<testCase>" credentials
-      Then I am not logged in
+      Given A user has the Master Log In page open in "chrome" browser
+      When The user uses a "<testCase>" credentials in Master page
+      Then The user is not logged in
 
       Examples:
-      | testCase |
+      | testCase     |
       | Wrong eMail  |
       | Wrong Pass   |
       | Blank eMail  |
