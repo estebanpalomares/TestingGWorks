@@ -10,8 +10,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChromeWebDriverService {
-
-    private String driverPath = new AppProperties().getAppProperties().getProperty("ChromeWebDriverPath");
     private WebDriver webDriver;
 
     private void setChromeWebDriver(){
