@@ -24,14 +24,44 @@ public class MasterPageLogIn {
         this.chromeWebDriver = this.chromeController.openUrlOnChrome(this.properties.getProperty("MasterLogInUrl"));
     }
 
-    @When("I use a valid credentials")
-    public void iUseAValidCredentials() throws InterruptedException {
+    @When("I use a {string} credentials")
+    public void iUseACredentials(String testCase) throws InterruptedException {
         TimeUnit.SECONDS.sleep(1);
         WebElement emailAddressBox = this.chromeWebDriver.findElement(By.id("emailAddress"));
-        emailAddressBox.sendKeys(System.getProperty("MasterUserEmail"));
         WebElement loginPasswordBox = this.chromeWebDriver.findElement(By.id("loginPassword"));
-        loginPasswordBox.sendKeys(System.getProperty("MasterUserPass"));
         WebElement loginButton = this.chromeWebDriver.findElement(By.xpath("/html/body/article/div/form/button"));
+
+        switch (testCase) {
+
+            case "valid":
+                emailAddressBox.sendKeys(System.getProperty("MasterUserEmail"));
+                loginPasswordBox.sendKeys(System.getProperty("MasterUserPass"));
+                break;
+
+            case "Wrong eMail":
+                emailAddressBox.sendKeys("wrong@email.com");
+                loginPasswordBox.sendKeys(System.getProperty("MasterUserPass"));
+                break;
+
+            case "Wrong Pass":
+                emailAddressBox.sendKeys(System.getProperty("MasterUserEmail"));
+                loginPasswordBox.sendKeys("WrongPassword");
+                break;
+
+            case"Blank eMail":
+                emailAddressBox.sendKeys("");
+                loginPasswordBox.sendKeys(System.getProperty("MasterUserPass"));
+                break;
+
+            case"Blank Pass":
+                emailAddressBox.sendKeys(System.getProperty("MasterUserEmail"));
+                loginPasswordBox.sendKeys("");
+                break;
+
+            default:
+                Assert.fail("The case "+testCase+" does not exist.");
+        }
+
         loginButton.click();
     }
 
@@ -39,6 +69,13 @@ public class MasterPageLogIn {
     public void iAmLoggedIn() throws InterruptedException {
         TimeUnit.SECONDS.sleep(4);
         Assert.assertEquals("Client List - FrontDesk",this.chromeWebDriver.getTitle());
+        this.chromeController.closeChrome();
+    }
+
+    @Then("I am not logged in")
+    public void iAmNotLoggedIn() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(4);
+        Assert.assertTrue(this.chromeWebDriver.getTitle().contains("gWorks Master Console - FrontDesk"));
         this.chromeController.closeChrome();
     }
 }
