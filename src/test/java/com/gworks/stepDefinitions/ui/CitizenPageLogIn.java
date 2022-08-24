@@ -8,24 +8,24 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-public class MasterPageLogIn {
-
+public class CitizenPageLogIn {
     private final ChromeWebDriverController chromeController = new ChromeWebDriverController();
     private final Properties properties = new AppProperties().getAppProperties();
     private WebDriver chromeWebDriver;
 
-    @Given("I have the Master Log In page open")
-    public void iHaveTheMasterLogInPageOpen() {
-        this.chromeWebDriver = this.chromeController.openUrlOnChrome(this.properties.getProperty("MasterLogInUrl"));
+    @Given("I have the Citizen Log In page open")
+    public void iHaveTheCitizenLogInPageOpen() {
+        this.chromeWebDriver = this.chromeController.openUrlOnChrome(this.properties.getProperty("CitizenLogInUrl"));
     }
 
-    @When("I use a {string} credentials")
-    public void iUseACredentials(String testCase) throws InterruptedException {
+    @When("I use a {string} credentials in Citizen")
+    public void iUseACredentialsInCitizen(String testCase) throws InterruptedException {
         TimeUnit.SECONDS.sleep(1);
         WebElement emailAddressBox = this.chromeWebDriver.findElement(By.id("emailAddress"));
         WebElement loginPasswordBox = this.chromeWebDriver.findElement(By.id("loginPassword"));
@@ -65,17 +65,17 @@ public class MasterPageLogIn {
         loginButton.click();
     }
 
-    @Then("I am logged in")
-    public void iAmLoggedIn() throws InterruptedException {
+    @Then("I am logged in Citizen")
+    public void iAmLoggedInCitizen() throws InterruptedException {
         TimeUnit.SECONDS.sleep(4);
-        Assert.assertEquals("Client List - FrontDesk",this.chromeWebDriver.getTitle());
+        Assert.assertEquals("Pay Bills - FrontDesk",this.chromeWebDriver.getTitle());
         this.chromeController.closeChrome();
     }
 
-    @Then("I am not logged in")
-    public void iAmNotLoggedIn() throws InterruptedException {
+    @Then("I am not logged in Citizen")
+    public void iAmNotLoggedInCitizen() throws InterruptedException {
         TimeUnit.SECONDS.sleep(4);
-        Assert.assertTrue(this.chromeWebDriver.getTitle().contains("gWorks Master Console - FrontDesk"));
+        Assert.assertTrue(this.chromeWebDriver.getTitle().contains("Home | gWorks - FrontDesk"));
         this.chromeController.closeChrome();
     }
 }
