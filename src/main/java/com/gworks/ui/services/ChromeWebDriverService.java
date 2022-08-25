@@ -1,6 +1,5 @@
 package com.gworks.ui.services;
 
-import com.gworks.utils.AppProperties;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -9,14 +8,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChromeWebDriverService {
+public class ChromeWebDriverService implements IChromeWebDriverService{
     private WebDriver webDriver;
-
-    private void setChromeWebDriver(){
+    @Override
+    public void setChromeWebDriver(){
         WebDriverManager.chromedriver().setup();
         this.webDriver = new ChromeDriver();
     }
 
+    @Override
     public WebDriver openUrlOnChrome(String url){
         setChromeWebDriver();
         this.webDriver.get(url);
@@ -24,6 +24,7 @@ public class ChromeWebDriverService {
         return this.webDriver;
     }
 
+    @Override
     public void closeChrome(){
         this.webDriver.close();
     }
