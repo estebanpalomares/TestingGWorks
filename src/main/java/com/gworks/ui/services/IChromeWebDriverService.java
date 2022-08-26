@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 public interface IChromeWebDriverService {
 
     void setChromeWebDriver();
-    WebDriver openUrlOnChrome(String url);
-    void closeChrome();
 
-    }
+    WebDriver openUrlOnChrome(String url);
+
+}

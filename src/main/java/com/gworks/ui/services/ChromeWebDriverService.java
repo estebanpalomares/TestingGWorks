@@ -23,9 +23,4 @@ public class ChromeWebDriverService implements IChromeWebDriverService{
 
         return this.webDriver;
     }
-
-    @Override
-    public void closeChrome(){
-        this.webDriver.close();
-    }
 }
