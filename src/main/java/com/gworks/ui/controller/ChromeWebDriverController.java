@@ -12,5 +12,4 @@ public class ChromeWebDriverController {
     private ChromeWebDriverService chromeService = new ChromeWebDriverService();
 
     public WebDriver openUrlOnChrome(String url){return this.chromeService.openUrlOnChrome(url);}
-    public void closeChrome(){this.chromeService.closeChrome();}
 }
