@@ -1,4 +1,4 @@
-package com.gworks.ui.services;
+package com.gworks.ui.services.driverServices;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.AllArgsConstructor;
@@ -6,21 +6,19 @@ import lombok.NoArgsConstructor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 @NoArgsConstructor
 @AllArgsConstructor
-public class ChromeWebDriverService implements IChromeWebDriverService{
+public class ChromeWebDriverService implements IChromeWebDriverService {
     private WebDriver webDriver;
     @Override
-    public void setChromeWebDriver(){
+    public WebDriver setChromeWebDriver(){
         WebDriverManager.chromedriver().setup();
         this.webDriver = new ChromeDriver();
-    }
-
-    @Override
-    public WebDriver openUrlOnChrome(String url){
-        setChromeWebDriver();
-        this.webDriver.get(url);
-
+        this.webDriver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        this.webDriver.manage().window().maximize();
         return this.webDriver;
     }
+
 }
