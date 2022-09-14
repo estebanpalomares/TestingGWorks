@@ -1,9 +1,9 @@
-package com.gworks.ui.services;
+package com.gworks.ui.services.driverServices;
 
 import org.openqa.selenium.WebDriver;
 
 public interface IWebDriversServices{
 
-    WebDriver openUrl(String url, String browser);
+    void openUrl(String url, String browser);
     void closeBrowser(WebDriver webDriver);
 }
